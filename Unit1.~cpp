@@ -109,7 +109,8 @@ void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
             xBall = -xBall;
     }
     // Game over.
-    if (false){
+    if (ImageBall->Left + ImageBall->Width < ShapeBackground->Left ||
+        ImageBall->Left > ShapeBackground->Left + ShapeBackground->Width){
         TimerBall->Enabled = false;
         ImageBall->Enabled = false;
     }
