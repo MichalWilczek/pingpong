@@ -9,6 +9,7 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 #include <Graphics.hpp>
+#include <Menus.hpp>
 //---------------------------------------------------------------------------
 class TFormPingpong : public TForm
 {
@@ -22,7 +23,14 @@ __published:	// IDE-managed Components
         TTimer *TimerPaddleRightUp;
         TTimer *TimerPaddleRightDown;
         TTimer *TimerBall;
-        TButton *ButtonNewGame;
+        TButton *ButtonNewRound;
+        TLabel *LabelPoints;
+        TMainMenu *MainMenu1;
+        TMenuItem *Game1;
+        TMenuItem *NewGame1;
+        TLabel *LabelMoves;
+        TMenuItem *H1;
+        TMenuItem *Aboutgame1;
         void __fastcall TimerPaddleLeftUpTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
@@ -32,7 +40,9 @@ __published:	// IDE-managed Components
         void __fastcall TimerPaddleRightUpTimer(TObject *Sender);
         void __fastcall TimerPaddleRightDownTimer(TObject *Sender);
         void __fastcall TimerBallTimer(TObject *Sender);
-        void __fastcall ButtonNewGameClick(TObject *Sender);
+        void __fastcall ButtonNewRoundClick(TObject *Sender);
+        void __fastcall NewGame1Click(TObject *Sender);
+        void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:	// User declarations
 public:		// User declarations
         __fastcall TFormPingpong(TComponent* Owner);
