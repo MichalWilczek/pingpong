@@ -7,7 +7,11 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
+
 TFormPingpong *FormPingpong;
+int xBall = -8;
+int yBall = 8;
+
 //---------------------------------------------------------------------------
 __fastcall TFormPingpong::TFormPingpong(TComponent* Owner)
         : TForm(Owner)
@@ -73,4 +77,57 @@ void __fastcall TFormPingpong::FormKeyDown(TObject *Sender, WORD &Key,
 //---------------------------------------------------------------------------
 
 
+
+void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
+{
+    // Move the ball on the screen.
+    ImageBall->Left += xBall;
+    ImageBall->Top += yBall;
+
+    // Catch the ball on the upper wall.
+    if (ImageBall->Top <= ShapeBackground->Top){
+        yBall = -yBall;
+    }
+    // Catch the ball on the lower wall.
+    if (ImageBall->Top + ImageBall->Height >= ShapeBackground->Height){
+        yBall = -yBall;
+    }
+    // Hit the ball with the left paddle.
+    if (ImagePaddleLeft->Left + ImagePaddleLeft->Width > ImageBall->Left &&
+        ImagePaddleLeft->Left < ImageBall->Left + ImageBall->Width &&
+        ImagePaddleLeft->Top < ImageBall->Top + ImageBall->Height/2 &&
+        ImagePaddleLeft->Top + ImagePaddleLeft->Height > ImageBall->Top + ImageBall->Height/2){
+        if (xBall < 0)
+            xBall = -xBall;
+    }
+    // Hit the ball with the right paddle.
+    if (ImagePaddleRight->Left + ImagePaddleRight->Width > ImageBall->Left &&
+        ImagePaddleRight->Left < ImageBall->Left + ImageBall->Width &&
+        ImagePaddleRight->Top < ImageBall->Top + ImageBall->Height/2 &&
+        ImagePaddleRight->Top + ImagePaddleRight->Height > ImageBall->Top + ImageBall->Height/2){
+        if (xBall > 0)
+            xBall = -xBall;
+    }
+    // Game over.
+    if (ImageBall->Left + ImageBall->Width < ShapeBackground->Left ||
+        ImageBall->Left > ShapeBackground->Left + ShapeBackground->Width){
+        TimerBall->Enabled = false;
+        ImageBall->Enabled = false;
+        ButtonNewGame->Visible = true;
+    }
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormPingpong::ButtonNewGameClick(TObject *Sender)
+{
+    ImageBall->Left = ShapeBackground->Left + ShapeBackground->Width/2 - ImageBall->Width/2;
+    ImageBall->Top = ShapeBackground->Top + ShapeBackground->Height/2 - ImageBall->Height/2;
+    ImageBall->Visible = true;
+    ImageBall->Enabled = true;
+
+    TimerBall->Enabled = true;
+    ButtonNewGame->Visible = false;
+}
+//---------------------------------------------------------------------------
 
