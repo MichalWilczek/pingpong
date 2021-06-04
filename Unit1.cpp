@@ -9,7 +9,7 @@
 #pragma resource "*.dfm"
 
 TFormPingpong *FormPingpong;
-int xBall = 8;
+int xBall = -8;
 int yBall = 8;
 
 //---------------------------------------------------------------------------
@@ -85,20 +85,35 @@ void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
     ImageBall->Top += yBall;
 
     // Catch the ball on the upper wall.
-    if (ImageBall->Top - 5 <= ShapeBackground->Top)
+    if (ImageBall->Top <= ShapeBackground->Top){
         yBall = -yBall;
-
+    }
     // Catch the ball on the lower wall.
-    if (ImageBall->Top + ImageBall->Height -5 >= ShapeBackground->Height)
+    if (ImageBall->Top + ImageBall->Height >= ShapeBackground->Height){
         yBall = -yBall;
-
+    }
     // Hit the ball with the left paddle.
-    if (ImagePaddle->Left + ImagePaddle->Width >= ImageBall->Left)
-        xBall = -xBall;
-
+    if (ImagePaddleLeft->Left + ImagePaddleLeft->Width > ImageBall->Left &&
+        ImagePaddleLeft->Left < ImageBall->Left + ImageBall->Width &&
+        ImagePaddleLeft->Top < ImageBall->Top + ImageBall->Height/2 &&
+        ImagePaddleLeft->Top + ImagePaddleLeft->Height > ImageBall->Top + ImageBall->Height/2){
+        if (xBall < 0)
+            xBall = -xBall;
+    }
     // Hit the ball with the right paddle.
-    if (ImagePaddle->Left <= ImageBall->Left + ImageBall->Width)
-        xBall = -xBall;
+    if (ImagePaddleRight->Left + ImagePaddleRight->Width > ImageBall->Left &&
+        ImagePaddleRight->Left < ImageBall->Left + ImageBall->Width &&
+        ImagePaddleRight->Top < ImageBall->Top + ImageBall->Height/2 &&
+        ImagePaddleRight->Top + ImagePaddleRight->Height > ImageBall->Top + ImageBall->Height/2){
+        if (xBall > 0)
+            xBall = -xBall;
+    }
+    // Game over.
+    if (ImageBall->Left + ImageBall->Width < ShapeBackground->Left ||
+        ImageBall->Left > ShapeBackground->Left + ShapeBackground->Width){
+        TimerBall->Enabled = false;
+        ImageBall->Enabled = false;
+    }
 
 }
 //---------------------------------------------------------------------------

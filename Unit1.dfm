@@ -1,7 +1,7 @@
 object FormPingpong: TFormPingpong
-  Left = 564
-  Top = 262
-  Width = 845
+  Left = 867
+  Top = 144
+  Width = 847
   Height = 540
   Caption = 'Pingpong'
   Color = clBtnFace
@@ -20,14 +20,14 @@ object FormPingpong: TFormPingpong
   object ShapeBackground: TShape
     Left = 0
     Top = 0
-    Width = 829
+    Width = 831
     Height = 501
     Align = alClient
     Brush.Color = clMenuBar
   end
   object ImagePaddleLeft: TImage
     Left = 24
-    Top = 360
+    Top = 168
     Width = 20
     Height = 121
     AutoSize = True
@@ -264,7 +264,7 @@ object FormPingpong: TFormPingpong
     Transparent = True
   end
   object ImageBall: TImage
-    Left = 360
+    Left = 384
     Top = 184
     Width = 35
     Height = 32
@@ -345,28 +345,28 @@ object FormPingpong: TFormPingpong
   end
   object TimerPaddleLeftUp: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 10
     OnTimer = TimerPaddleLeftUpTimer
     Left = 24
     Top = 40
   end
   object TimerPaddleLeftDown: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 10
     OnTimer = TimerPaddleLeftDownTimer
     Left = 24
     Top = 72
   end
   object TimerPaddleRightUp: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 10
     OnTimer = TimerPaddleRightUpTimer
     Left = 792
     Top = 56
   end
   object TimerPaddleRightDown: TTimer
     Enabled = False
-    Interval = 20
+    Interval = 10
     OnTimer = TimerPaddleRightDownTimer
     Left = 792
     Top = 96
