@@ -1,6 +1,6 @@
 object FormPingpong: TFormPingpong
-  Left = 730
-  Top = 45
+  Left = 558
+  Top = 152
   Width = 845
   Height = 540
   Caption = 'Pingpong'
@@ -354,5 +354,19 @@ object FormPingpong: TFormPingpong
     OnTimer = TimerPaddleLeftDownTimer
     Left = 24
     Top = 72
+  end
+  object TimerPaddleRightUp: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = TimerPaddleRightUpTimer
+    Left = 792
+    Top = 56
+  end
+  object TimerPaddleRightDown: TTimer
+    Enabled = False
+    Interval = 20
+    OnTimer = TimerPaddleRightDownTimer
+    Left = 792
+    Top = 96
   end
 end

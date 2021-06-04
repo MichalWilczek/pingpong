@@ -1,10 +1,12 @@
 object FormPingpong: TFormPingpong
-  Left = 558
-  Top = 152
+  Left = 564
+  Top = 262
   Width = 845
   Height = 540
   Caption = 'Pingpong'
   Color = clBtnFace
+  UseDockManager = True
+  DockSite = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -368,5 +370,11 @@ object FormPingpong: TFormPingpong
     OnTimer = TimerPaddleRightDownTimer
     Left = 792
     Top = 96
+  end
+  object TimerBall: TTimer
+    Interval = 10
+    OnTimer = TimerBallTimer
+    Left = 376
+    Top = 56
   end
 end

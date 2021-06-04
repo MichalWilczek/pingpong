@@ -7,7 +7,11 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
+
 TFormPingpong *FormPingpong;
+int xBall = 8;
+int yBall = 8;
+
 //---------------------------------------------------------------------------
 __fastcall TFormPingpong::TFormPingpong(TComponent* Owner)
         : TForm(Owner)
@@ -73,4 +77,29 @@ void __fastcall TFormPingpong::FormKeyDown(TObject *Sender, WORD &Key,
 //---------------------------------------------------------------------------
 
 
+
+void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
+{
+    // Move the ball on the screen.
+    ImageBall->Left += xBall;
+    ImageBall->Top += yBall;
+
+    // Catch the ball on the upper wall.
+    if (ImageBall->Top - 5 <= ShapeBackground->Top)
+        yBall = -yBall;
+
+    // Catch the ball on the lower wall.
+    if (ImageBall->Top + ImageBall->Height -5 >= ShapeBackground->Height)
+        yBall = -yBall;
+
+    // Hit the ball with the left paddle.
+    if (ImagePaddle->Left + ImagePaddle->Width >= ImageBall->Left)
+        xBall = -xBall;
+
+    // Hit the ball with the right paddle.
+    if (ImagePaddle->Left <= ImageBall->Left + ImageBall->Width)
+        xBall = -xBall;
+
+}
+//---------------------------------------------------------------------------
 
