@@ -36,6 +36,15 @@ void increaseBallSpeed(int displacementIncrement=1){
 __fastcall TFormPingpong::TFormPingpong(TComponent* Owner)
         : TForm(Owner)
 {
+    ShowMessage(
+    "This is the Pingpong game. \n \n"
+    "The player on the left uses the W and S keywords. \n"
+    "The player on the right uses the UP and DOWN keywords. \n \n"
+    "If you hit the ball with the centre of your paddle, you'll change the ball rebound angle. \n"
+    "The ball will also speed up. \n"
+    "The longer you play, the faster the ball moves. \n"
+    );
+
     ImageBall->Left = ShapeBackground->Left + ShapeBackground->Width/2 - ImageBall->Width/2;
     ImageBall->Top = ShapeBackground->Top + ShapeBackground->Height/2 - ImageBall->Height/2;
 }
@@ -98,8 +107,6 @@ void __fastcall TFormPingpong::FormKeyDown(TObject *Sender, WORD &Key,
 }
 //---------------------------------------------------------------------------
 
-
-
 void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
 {
     // Move the ball on the screen.
@@ -119,9 +126,18 @@ void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
         ImagePaddleLeft->Left < ImageBall->Left + ImageBall->Width &&
         ImagePaddleLeft->Top < ImageBall->Top + ImageBall->Height/2 &&
         ImagePaddleLeft->Top + ImagePaddleLeft->Height > ImageBall->Top + ImageBall->Height/2){
+
         if (xBall < 0){
             xBall = -xBall;
             moves++;
+            increaseBallSpeed();
+        }
+
+        // Increase the ball speed and change its rebound angle if the user
+        // hits the ball at the center.
+        if (abs((ImagePaddleLeft->Top + ImagePaddleLeft->Height/2) - (ImageBall->Top + ImageBall->Height)) < 2.5) {
+            xBall += 3;
+            yBall -= 3;
             increaseBallSpeed();
         }
     }
@@ -130,9 +146,18 @@ void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
         ImagePaddleRight->Left < ImageBall->Left + ImageBall->Width &&
         ImagePaddleRight->Top < ImageBall->Top + ImageBall->Height/2 &&
         ImagePaddleRight->Top + ImagePaddleRight->Height > ImageBall->Top + ImageBall->Height/2){
+
         if (xBall > 0){
             xBall = -xBall;
             moves++;
+            increaseBallSpeed();
+        }
+
+        // Increase the ball speed and change its rebound angle if the user
+        // hits the ball at the center.
+        if (abs((ImagePaddleRight->Top + ImagePaddleRight->Height/2) - (ImageBall->Top + ImageBall->Height)) < 2.5) {
+            xBall -= 3;
+            yBall += 3;
             increaseBallSpeed();
         }
     }
@@ -158,6 +183,10 @@ void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
 
 void __fastcall TFormPingpong::ButtonNewRoundClick(TObject *Sender)
 {
+    xBall = X_BALL_INIT;
+    yBall = Y_BALL_INIT;
+    moves = 0;
+
     ImageBall->Left = ShapeBackground->Left + ShapeBackground->Width/2 - ImageBall->Width/2;
     ImageBall->Top = ShapeBackground->Top + ShapeBackground->Height/2 - ImageBall->Height/2;
     ImageBall->Visible = true;
@@ -178,16 +207,4 @@ void __fastcall TFormPingpong::New1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TFormPingpong::FormClose(TObject *Sender,
-      TCloseAction &Action)
-{
-    TimerBall->Enabled = false;
-
-    if (Application->MessageBox("Do you want to exit?",
-    "Confirm", MB_YESNO | MB_ICONQUESTION) == IDNO) {
-        Action=0;
-    }
-    TimerBall->Enabled = true;
-}
-//---------------------------------------------------------------------------
 

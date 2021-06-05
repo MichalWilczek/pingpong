@@ -40,7 +40,6 @@ __published:	// IDE-managed Components
         void __fastcall TimerBallTimer(TObject *Sender);
         void __fastcall ButtonNewRoundClick(TObject *Sender);
         void __fastcall New1Click(TObject *Sender);
-        void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:	// User declarations
 public:		// User declarations
         __fastcall TFormPingpong(TComponent* Owner);

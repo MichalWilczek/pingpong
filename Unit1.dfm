@@ -1,9 +1,10 @@
 object FormPingpong: TFormPingpong
   Left = 330
   Top = 121
-  Width = 847
-  Height = 540
+  BorderStyle = bsToolWindow
   Caption = 'Pingpong'
+  ClientHeight = 481
+  ClientWidth = 831
   Color = clBtnFace
   UseDockManager = True
   DockSite = True
@@ -14,7 +15,6 @@ object FormPingpong: TFormPingpong
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
-  OnClose = FormClose
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
@@ -388,7 +388,6 @@ object FormPingpong: TFormPingpong
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    Visible = False
     OnClick = ButtonNewRoundClick
   end
   object TimerPaddleLeftUp: TTimer
@@ -420,6 +419,7 @@ object FormPingpong: TFormPingpong
     Top = 96
   end
   object TimerBall: TTimer
+    Enabled = False
     Interval = 10
     OnTimer = TimerBallTimer
     Left = 504
