@@ -3,16 +3,16 @@
 <PROJECT>
   <MACROS>
     <VERSION value="BCB.06.00"/>
-    <PROJECT value="Project1.exe"/>
-    <OBJFILES value="Project1.obj Unit1.obj"/>
-    <RESFILES value="Project1.res"/>
+    <PROJECT value="Pingpong.exe"/>
+    <OBJFILES value="Pingpong.obj &quot;..\pingpong — kopia\Unit1.obj&quot;"/>
+    <RESFILES value="Pingpong.res"/>
     <DEFFILE value=""/>
-    <RESDEPEN value="$(RESFILES) Unit1.dfm"/>
+    <RESDEPEN value="$(RESFILES) &quot;..\pingpong — kopia\Unit1.dfm&quot;"/>
     <LIBFILES value=""/>
     <LIBRARIES value=""/>
     <SPARELIBS value="vcl.lib rtl.lib"/>
     <PACKAGES value="vcl.bpi rtl.bpi vclx.bpi bcbsmp.bpi dclocx.bpi"/>
-    <PATHCPP value=".;"/>
+    <PATHCPP value=".;&quot;..\pingpong — kopia&quot;"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -21,9 +21,9 @@
     <LINKER value="ilink32"/>
     <USERDEFINES value="_DEBUG"/>
     <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
-    <MAINSOURCE value="Project1.cpp"/>
-    <INCLUDEPATH value="&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;C:\Users\User\Desktop\pingpong;$(BCB)\include;$(BCB)\include\vcl"/>
-    <LIBPATH value="&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;C:\Users\User\Desktop\pingpong;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <MAINSOURCE value="Pingpong.cpp"/>
+    <INCLUDEPATH value="&quot;..\pingpong — kopia&quot;;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;C:\Users\User\Desktop\pingpong;$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="&quot;..\pingpong — kopia&quot;;&quot;C:\Program Files (x86)\Borland\CBuilder6\Projects&quot;;C:\Users\User\Desktop\pingpong;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-w-par"/>
     <OTHERFILES value=""/>
   </MACROS>
@@ -43,9 +43,9 @@
     <OTHERFILES value=""/>
   </LINKER>
   <FILELIST>
-      <FILE FILENAME="Project1.res" FORMNAME="" UNITNAME="Project1.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="Project1.cpp" FORMNAME="" UNITNAME="Project1" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="Unit1.cpp" FORMNAME="FormPingpong" UNITNAME="Unit1" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Pingpong.res" FORMNAME="" UNITNAME="Pingpong.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Pingpong.cpp" FORMNAME="" UNITNAME="Pingpong" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="..\pingpong — kopia\Unit1.cpp" FORMNAME="FormPingpong" UNITNAME="Unit1" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

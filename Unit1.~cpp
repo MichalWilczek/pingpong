@@ -36,8 +36,15 @@ void increaseBallSpeed(int displacementIncrement=1){
 __fastcall TFormPingpong::TFormPingpong(TComponent* Owner)
         : TForm(Owner)
 {
-    xBall = X_BALL_INIT;
-    yBall = Y_BALL_INIT;
+    ShowMessage(
+    "This is the Pingpong game. \n \n"
+    "The player on the left uses the W and S keywords. \n"
+    "The player on the right uses the UP and DOWN keywords. \n \n"
+    "If you hit the ball with the centre of your paddle, you'll change the ball rebound angle. \n"
+    "The ball will also speed up. \n"
+    "The longer you play, the faster the ball moves. \n"
+    "You can freely change the screenboard size."
+    );
 
     ImageBall->Left = ShapeBackground->Left + ShapeBackground->Width/2 - ImageBall->Width/2;
     ImageBall->Top = ShapeBackground->Top + ShapeBackground->Height/2 - ImageBall->Height/2;
@@ -103,7 +110,6 @@ void __fastcall TFormPingpong::FormKeyDown(TObject *Sender, WORD &Key,
 
 void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
 {
-
     // Move the ball on the screen.
     ImageBall->Left += xBall;
     ImageBall->Top += yBall;
@@ -155,15 +161,11 @@ void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
         LabelMoves->Caption = "Number of moves: " + IntToStr(moves);
         LabelMoves->Visible = true;
     }
-
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TFormPingpong::ButtonNewRoundClick(TObject *Sender)
 {
-    xBall = X_BALL_INIT;
-    yBall = Y_BALL_INIT;
-
     ImageBall->Left = ShapeBackground->Left + ShapeBackground->Width/2 - ImageBall->Width/2;
     ImageBall->Top = ShapeBackground->Top + ShapeBackground->Height/2 - ImageBall->Height/2;
     ImageBall->Visible = true;
@@ -175,7 +177,7 @@ void __fastcall TFormPingpong::ButtonNewRoundClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TFormPingpong::NewGame1Click(TObject *Sender)
+void __fastcall TFormPingpong::New1Click(TObject *Sender)
 {
     FormPingpong->ButtonNewRoundClick(ButtonNewRound);
     numberWinsLeft = 0;
@@ -183,21 +185,5 @@ void __fastcall TFormPingpong::NewGame1Click(TObject *Sender)
     LabelPoints->Caption = IntToStr(numberWinsLeft) + " : " + IntToStr(numberWinsRight);
 }
 //---------------------------------------------------------------------------
-
-void __fastcall TFormPingpong::FormClose(TObject *Sender,
-      TCloseAction &Action)
-{
-    TimerBall->Enabled = false;
-
-    if (Application->MessageBox("Do you want to exit?",
-    "Confirm", MB_YESNO | MB_ICONQUESTION) == IDNO) {
-        Action=0;
-    }
-
-    TimerBall->Enabled = true;
-}
-//---------------------------------------------------------------------------
-
-
 
 

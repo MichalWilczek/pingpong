@@ -1,9 +1,9 @@
 object FormPingpong: TFormPingpong
-  Left = -1302
-  Top = -28
+  Left = 330
+  Top = 121
   BorderStyle = bsToolWindow
   Caption = 'Pingpong'
-  ClientHeight = 470
+  ClientHeight = 481
   ClientWidth = 831
   Color = clBtnFace
   UseDockManager = True
@@ -15,7 +15,6 @@ object FormPingpong: TFormPingpong
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
-  OnClose = FormClose
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
@@ -24,7 +23,7 @@ object FormPingpong: TFormPingpong
     Left = 0
     Top = 36
     Width = 831
-    Height = 434
+    Height = 445
     Align = alClient
     Brush.Color = clMenuBar
   end
@@ -346,6 +345,20 @@ object FormPingpong: TFormPingpong
       FF00}
     Transparent = True
   end
+  object LabelMoves: TLabel
+    Left = 280
+    Top = 48
+    Width = 104
+    Height = 36
+    Caption = 'Moves: '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -31
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
   object LabelPoints: TLabel
     Left = 0
     Top = 0
@@ -360,26 +373,11 @@ object FormPingpong: TFormPingpong
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
-    Layout = tlCenter
-  end
-  object LabelMoves: TLabel
-    Left = 272
-    Top = 40
-    Width = 96
-    Height = 36
-    Alignment = taCenter
-    Caption = 'Moves:'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -31
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    Visible = False
+    Transparent = True
   end
   object ButtonNewRound: TButton
-    Left = 304
-    Top = 392
+    Left = 320
+    Top = 384
     Width = 201
     Height = 49
     Caption = 'New Round'
@@ -424,23 +422,17 @@ object FormPingpong: TFormPingpong
     Enabled = False
     Interval = 10
     OnTimer = TimerBallTimer
-    Left = 544
-    Top = 8
+    Left = 504
+    Top = 40
   end
   object MainMenu1: TMainMenu
-    Left = 72
-    Top = 40
+    Left = 88
+    Top = 16
     object Game1: TMenuItem
       Caption = '&Game'
-      object NewGame1: TMenuItem
+      object New1: TMenuItem
         Caption = '&New'
-        OnClick = NewGame1Click
-      end
-    end
-    object H1: TMenuItem
-      Caption = '&Help'
-      object Aboutgame1: TMenuItem
-        Caption = '&About game'
+        OnClick = New1Click
       end
     end
   end

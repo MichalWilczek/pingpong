@@ -24,13 +24,11 @@ __published:	// IDE-managed Components
         TTimer *TimerPaddleRightDown;
         TTimer *TimerBall;
         TButton *ButtonNewRound;
-        TLabel *LabelPoints;
+        TLabel *LabelMoves;
         TMainMenu *MainMenu1;
         TMenuItem *Game1;
-        TMenuItem *NewGame1;
-        TLabel *LabelMoves;
-        TMenuItem *H1;
-        TMenuItem *Aboutgame1;
+        TMenuItem *New1;
+        TLabel *LabelPoints;
         void __fastcall TimerPaddleLeftUpTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
@@ -41,8 +39,7 @@ __published:	// IDE-managed Components
         void __fastcall TimerPaddleRightDownTimer(TObject *Sender);
         void __fastcall TimerBallTimer(TObject *Sender);
         void __fastcall ButtonNewRoundClick(TObject *Sender);
-        void __fastcall NewGame1Click(TObject *Sender);
-        void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+        void __fastcall New1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TFormPingpong(TComponent* Owner);
