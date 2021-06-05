@@ -1,6 +1,6 @@
 object FormPingpong: TFormPingpong
-  Left = 611
-  Top = 114
+  Left = 330
+  Top = 121
   Width = 847
   Height = 540
   Caption = 'Pingpong'
@@ -12,16 +12,18 @@ object FormPingpong: TFormPingpong
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
+  OnClose = FormClose
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object ShapeBackground: TShape
     Left = 0
-    Top = 0
+    Top = 36
     Width = 831
-    Height = 501
+    Height = 445
     Align = alClient
     Brush.Color = clMenuBar
   end
@@ -343,12 +345,42 @@ object FormPingpong: TFormPingpong
       FF00}
     Transparent = True
   end
-  object ButtonNewGame: TButton
-    Left = 296
-    Top = 376
+  object LabelMoves: TLabel
+    Left = 280
+    Top = 48
+    Width = 104
+    Height = 36
+    Caption = 'Moves: '
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -31
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
+  object LabelPoints: TLabel
+    Left = 0
+    Top = 0
+    Width = 831
+    Height = 36
+    Align = alTop
+    Alignment = taCenter
+    Caption = '0 : 0'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -31
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    Transparent = True
+  end
+  object ButtonNewRound: TButton
+    Left = 320
+    Top = 384
     Width = 201
     Height = 49
-    Caption = 'New Game'
+    Caption = 'New Round'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -31
@@ -357,7 +389,7 @@ object FormPingpong: TFormPingpong
     ParentFont = False
     TabOrder = 0
     Visible = False
-    OnClick = ButtonNewGameClick
+    OnClick = ButtonNewRoundClick
   end
   object TimerPaddleLeftUp: TTimer
     Enabled = False
@@ -390,7 +422,18 @@ object FormPingpong: TFormPingpong
   object TimerBall: TTimer
     Interval = 10
     OnTimer = TimerBallTimer
-    Left = 376
-    Top = 56
+    Left = 504
+    Top = 40
+  end
+  object MainMenu1: TMainMenu
+    Left = 88
+    Top = 16
+    object Game1: TMenuItem
+      Caption = '&Game'
+      object New1: TMenuItem
+        Caption = '&New'
+        OnClick = New1Click
+      end
+    end
   end
 end

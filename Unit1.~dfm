@@ -1,6 +1,6 @@
 object FormPingpong: TFormPingpong
-  Left = 867
-  Top = 144
+  Left = 611
+  Top = 114
   Width = 847
   Height = 540
   Caption = 'Pingpong'
@@ -342,6 +342,22 @@ object FormPingpong: TFormPingpong
       FFFFFFFFFFFFFFFFFFFFFFFF0000000000000000FFFFFFFFFFFFFFFFFFFFFFFF
       FF00}
     Transparent = True
+  end
+  object ButtonNewGame: TButton
+    Left = 296
+    Top = 376
+    Width = 201
+    Height = 49
+    Caption = 'New Game'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -31
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    Visible = False
+    OnClick = ButtonNewGameClick
   end
   object TimerPaddleLeftUp: TTimer
     Enabled = False

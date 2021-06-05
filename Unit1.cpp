@@ -9,41 +9,63 @@
 #pragma resource "*.dfm"
 
 TFormPingpong *FormPingpong;
-int xBall = -8;
-int yBall = 8;
+int X_BALL_INIT = -3;
+int Y_BALL_INIT = 3;
+
+int xBall = X_BALL_INIT;
+int yBall = Y_BALL_INIT;
+int moves = 0;
+int numberWinsLeft = 0;
+int numberWinsRight = 0;
+
+void increaseBallSpeed(int displacementIncrement=1){
+    // Speed up the ball after a given number of moves
+    if (moves%4 == 0 & moves != 0) {
+
+        // Increase the ball displacement in x-direction.
+        if (xBall < 0) xBall -= displacementIncrement;
+        else xBall += displacementIncrement;
+
+        // Increase the ball displacement in y-direction.
+        if (yBall < 0) xBall -= displacementIncrement;
+        else yBall += displacementIncrement;
+    }
+}
 
 //---------------------------------------------------------------------------
 __fastcall TFormPingpong::TFormPingpong(TComponent* Owner)
         : TForm(Owner)
 {
+    ImageBall->Left = ShapeBackground->Left + ShapeBackground->Width/2 - ImageBall->Width/2;
+    ImageBall->Top = ShapeBackground->Top + ShapeBackground->Height/2 - ImageBall->Height/2;
 }
 
 //---------------------------------------------------------------------------
 
 void __fastcall TFormPingpong::TimerPaddleLeftUpTimer(TObject *Sender)
 {
-    if (ImagePaddleLeft->Top - 10 > 0)
+    if (ImagePaddleLeft->Top - 50 > 0)
         ImagePaddleLeft->Top -= 10;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TFormPingpong::TimerPaddleLeftDownTimer(TObject *Sender)
 {
-    if (ImagePaddleLeft->Top + ImagePaddleLeft->Height + 10 < ShapeBackground->Height)
+    if (ImagePaddleLeft->Top + ImagePaddleLeft->Height - 20 < ShapeBackground->Height)
         ImagePaddleLeft->Top += 10;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TFormPingpong::TimerPaddleRightUpTimer(TObject *Sender)
 {
-    if (ImagePaddleRight->Top - 10 > 0)
+    if (ImagePaddleRight->Top - 50 > 0)
         ImagePaddleRight->Top -= 10;
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TFormPingpong::TimerPaddleRightDownTimer(TObject *Sender)
 {
-    if (ImagePaddleRight->Top + ImagePaddleRight->Height + 10 < ShapeBackground->Height)
+    if (ImagePaddleRight->Top + ImagePaddleRight->Height - 20 < ShapeBackground->Height)
         ImagePaddleRight->Top += 10;
 }
 //---------------------------------------------------------------------------
@@ -97,29 +119,44 @@ void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
         ImagePaddleLeft->Left < ImageBall->Left + ImageBall->Width &&
         ImagePaddleLeft->Top < ImageBall->Top + ImageBall->Height/2 &&
         ImagePaddleLeft->Top + ImagePaddleLeft->Height > ImageBall->Top + ImageBall->Height/2){
-        if (xBall < 0)
+        if (xBall < 0){
             xBall = -xBall;
+            moves++;
+            increaseBallSpeed();
+        }
     }
     // Hit the ball with the right paddle.
     if (ImagePaddleRight->Left + ImagePaddleRight->Width > ImageBall->Left &&
         ImagePaddleRight->Left < ImageBall->Left + ImageBall->Width &&
         ImagePaddleRight->Top < ImageBall->Top + ImageBall->Height/2 &&
         ImagePaddleRight->Top + ImagePaddleRight->Height > ImageBall->Top + ImageBall->Height/2){
-        if (xBall > 0)
+        if (xBall > 0){
             xBall = -xBall;
+            moves++;
+            increaseBallSpeed();
+        }
     }
     // Game over.
     if (ImageBall->Left + ImageBall->Width < ShapeBackground->Left ||
         ImageBall->Left > ShapeBackground->Left + ShapeBackground->Width){
+
+        if (ImageBall->Left + ImageBall->Width < ShapeBackground->Left)
+            numberWinsRight++;
+        if (ImageBall->Left > ShapeBackground->Left + ShapeBackground->Width)
+            numberWinsLeft++;
+
         TimerBall->Enabled = false;
         ImageBall->Enabled = false;
-        ButtonNewGame->Visible = true;
-    }
+        ButtonNewRound->Visible = true;
 
+        LabelPoints->Caption = IntToStr(numberWinsLeft) + " : " + IntToStr(numberWinsRight);
+        LabelMoves->Caption = "Number of moves: " + IntToStr(moves);
+        LabelMoves->Visible = true;
+    }
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TFormPingpong::ButtonNewGameClick(TObject *Sender)
+void __fastcall TFormPingpong::ButtonNewRoundClick(TObject *Sender)
 {
     ImageBall->Left = ShapeBackground->Left + ShapeBackground->Width/2 - ImageBall->Width/2;
     ImageBall->Top = ShapeBackground->Top + ShapeBackground->Height/2 - ImageBall->Height/2;
@@ -127,7 +164,30 @@ void __fastcall TFormPingpong::ButtonNewGameClick(TObject *Sender)
     ImageBall->Enabled = true;
 
     TimerBall->Enabled = true;
-    ButtonNewGame->Visible = false;
+    ButtonNewRound->Visible = false;
+    LabelMoves->Visible = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormPingpong::New1Click(TObject *Sender)
+{
+    FormPingpong->ButtonNewRoundClick(ButtonNewRound);
+    numberWinsLeft = 0;
+    numberWinsRight = 0;
+    LabelPoints->Caption = IntToStr(numberWinsLeft) + " : " + IntToStr(numberWinsRight);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormPingpong::FormClose(TObject *Sender,
+      TCloseAction &Action)
+{
+    TimerBall->Enabled = false;
+
+    if (Application->MessageBox("Do you want to exit?",
+    "Confirm", MB_YESNO | MB_ICONQUESTION) == IDNO) {
+        Action=0;
+    }
+    TimerBall->Enabled = true;
 }
 //---------------------------------------------------------------------------
 

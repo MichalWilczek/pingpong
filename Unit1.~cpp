@@ -113,8 +113,21 @@ void __fastcall TFormPingpong::TimerBallTimer(TObject *Sender)
         ImageBall->Left > ShapeBackground->Left + ShapeBackground->Width){
         TimerBall->Enabled = false;
         ImageBall->Enabled = false;
+        ButtonNewGame->Visible = true;
     }
 
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormPingpong::ButtonNewGameClick(TObject *Sender)
+{
+    ImageBall->Left = ShapeBackground->Left + ShapeBackground->Width/2 - ImageBall->Width/2;
+    ImageBall->Top = ShapeBackground->Top + ShapeBackground->Height/2 - ImageBall->Height/2;
+    ImageBall->Visible = true;
+    ImageBall->Enabled = true;
+
+    TimerBall->Enabled = true;
+    ButtonNewGame->Visible = false;
 }
 //---------------------------------------------------------------------------
 
